@@ -1,46 +1,32 @@
-# Getting Started with Create React App
+# React Life Cycle =>  mount, unmount
+- class component -> functional component
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# useState, useCallback, useMemo , useEffect
 
-## Available Scripts
+# useEffect
+- useEffect How doest it works?
+- useEffect(()=>{
+    console.log()
+})
 
-In the project directory, you can run:
+How many time comp will render and how and why?
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Experiment
+- do experiment with useEffect and setTimeOut 
+- do experiment with useEffect and setInterval
+- do experiment with useEffect and setTimeOut with useState
+- do experiment with useEffect and setInterval with useState
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- do expertiment with loop with setInterval
+- do expertiment with loop with setTimeout
 
-### `npm test`
+# Event Loop
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# JS - Varirables, data types, statements - if, switch, loops, 
 
-### `npm run build`
+# learn a string and it's functions -> concar
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# learn a array and it's functions
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+# advance function map, filter, reduce, find
