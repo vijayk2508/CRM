@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/138.78649980.chunk.js","mappings":"2HAUA,UARA,WACE,OACEA,EAAAA,EAAAA,KAAA,SAIJ,C","sources":["components/pages/Customer/CustomerList.tsx"],"sourcesContent":["import React from 'react'\n\nfunction CustomerList() {\n  return (\n    <div>\n      \n    </div>\n  )\n}\n\nexport default CustomerList\n"],"names":["_jsx"],"sourceRoot":""}
