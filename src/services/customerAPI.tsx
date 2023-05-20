@@ -11,5 +11,3 @@ export async function getAllCustomer() {
     console.error(error);
   }
 }
-
-
