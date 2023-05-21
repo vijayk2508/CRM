@@ -25,7 +25,7 @@ How many time comp will render and how and why?
 
 # JS - Varirables, data types, statements - if, switch, loops, 
 
-# learn a string and it's functions -> concar
+# learn a string and it's functions -> concat
 
 # learn a array and it's functions
 
