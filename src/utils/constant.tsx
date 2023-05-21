@@ -77,7 +77,5 @@ export const secondaryListItemsArray : iNavListItem[] = [
 ];
 
 export const APIS = {
-  GET_ALL_CUSTOMERS : '/api/getAllCustomers',
-  SAVE_CUSTOMER : '/api/saveCustomer',
-  DELETE_CUSTOMER: '/api/deleteCustomer'
+  CUSTOMERS : '/api/customers',
 }

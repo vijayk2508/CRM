@@ -1,5 +1,5 @@
 import { APIS } from "../utils/constant";
-import { generateCustomerId } from "../utils/helperFunction";
+import { currentTime, generateCustomerId } from "../utils/helperFunction";
 import mock from "./mock";
 
 let data = {
@@ -127,14 +127,20 @@ let data = {
   ],
 };
 
-mock.onGet(APIS.GET_ALL_CUSTOMERS).reply(() => {
+mock.onGet(APIS.CUSTOMERS).reply(() => {
   return [200, data.customerList];
 });
 
-mock.onPost(APIS.SAVE_CUSTOMER).reply((config) => {
+mock.onPost(APIS.CUSTOMERS).reply((config) => {
   const customerData = JSON.parse(config.data);
   const newCustomerId = generateCustomerId();
-  const newCustomer = {  id: newCustomerId,  ...customerData,  };
+
+  const newCustomer = {
+    id: newCustomerId,
+    ...customerData,
+    createdAt: currentTime,
+    updatedAt: currentTime,
+  };
 
   // Save the new customer to the mock database
   data.customerList.push(newCustomer);
@@ -157,6 +163,7 @@ mock.onPut(/\/api\/customers\/\d+/).reply((config) => {
     data.customerList[customerIndex] = {
       ...data.customerList[customerIndex],
       ...customerData,
+      updatedAt: currentTime,
     };
 
     return [200, data.customerList[customerIndex]]; // Return a response with the updated customer data
