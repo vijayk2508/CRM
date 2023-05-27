@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
-function CustomerModal() {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+const CustomerModal: React.FC = () => {
+  return <div></div>;
+};
 
-export default CustomerModal
+export default CustomerModal;

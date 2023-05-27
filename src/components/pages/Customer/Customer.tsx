@@ -9,7 +9,7 @@ import { makeStyles } from "@mui/styles";
 import { getAllCustomer } from "../../../services/customerAPI";
 
 const style = {
-  position: "absolute" as "absolute",
+  position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: any) => ({
   },
 }));
 
-function Customer() {
+const Customer: React.FC = () => {
   const classes = useStyles();
   const [open, setOpen] = useState<boolean>(false);
   const [formData, setFormData] = useState({
@@ -197,6 +197,6 @@ function Customer() {
       </Modal>
     </Grid>
   );
-}
+};
 
 export default Customer;

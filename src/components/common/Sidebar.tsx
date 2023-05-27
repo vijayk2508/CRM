@@ -9,7 +9,7 @@ import {
 } from "../../utils/constant";
 import ListItem from "./ListItem";
 
-function Sidebar() {
+const Sidebar: React.FC = () => {
   const mainListItems = useMemo(() => {
     return mainListItemsArray.map((item) => (
       <ListItem
@@ -45,6 +45,6 @@ function Sidebar() {
       {secondaryListItems}
     </List>
   );
-}
+};
 
 export default Sidebar;

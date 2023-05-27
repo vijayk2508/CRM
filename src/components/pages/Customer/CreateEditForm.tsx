@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
-function CreateEditForm() {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+const CreateEditForm: React.FC = () => {
+  return <div></div>;
+};
 
-export default CreateEditForm
+export default CreateEditForm;

@@ -5,7 +5,7 @@ import Chart from "../common/Chart";
 import Deposits from "../common/Deposits";
 import Orders from "../common/Orders";
 
-export default function Dashboard() {
+const Dashboard: React.FC = () => {
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} md={8} lg={9}>
@@ -41,4 +41,6 @@ export default function Dashboard() {
       </Grid>
     </Grid>
   );
-}
+};
+
+export default Dashboard;

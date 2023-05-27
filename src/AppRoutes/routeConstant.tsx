@@ -1,27 +1,105 @@
-import { iRouteConfig, iRoueLink } from "../interfaces/RouteConfig";
+import { lazy, memo } from "react";
+import { IRouteConfig, IKeyValue } from "../interfaces/IRouteConfig";
 
-export const roueLink: iRoueLink = {
-  Login: "/",
+const routeLink: IKeyValue = {
+  Home: "/",
+  Login: "/Login",
   SignUp: "/SignUp",
   ForgetPassword: "/ForgetPassword",
   ResetPassword: "/ResetPassword",
+  Customer: "/Customer",
 };
 
-export const routes: iRouteConfig[] = [
+const componentType: IKeyValue = {
+  LAYOUT: "layout",
+};
+
+const ComponentParent: IKeyValue = {
+  common: "common",
+  pages: "pages",
+};
+
+const NonAuthRouteArray: IRouteConfig[] = [
   {
-    path: roueLink.Login,
-    componentPath: "pages/Authentication/Login",
+    componentParent: "pages",
+    componentPath: "Authentication/Login",
+    exact: true,
+    isAuthenticated: false,
+    path: routeLink.Home,
+  },
+
+  {
+    componentParent: "pages",
+    componentPath: "Authentication/SignUp",
+    exact: true,
+    isAuthenticated: false,
+    path: routeLink.SignUp,
   },
   {
-    path: roueLink.SignUp,
-    componentPath: "pages/Authentication/SignUp",
+    componentParent: "pages",
+    componentPath: "Authentication/ForgetPassword",
+    exact: true,
+    isAuthenticated: false,
+    path: routeLink.ForgetPassword,
   },
   {
-    path: roueLink.ForgetPassword,
-    componentPath: "pages/Authentication/ForgetPassword",
-  },
-  {
-    path: roueLink.ForgetPassword,
-    componentPath: "pages/Authentication/ResetPassword",
+    componentParent: "pages",
+    componentPath: "Authentication/ResetPassword",
+    exact: true,
+    isAuthenticated: false,
+    path: routeLink.ForgetPassword,
   },
 ];
+
+const AuthRouteArray: IRouteConfig[] = [
+  {
+    componentParent: "pages",
+    componentPath: "Customer/Customer",
+    exact: true,
+    isAuthenticated: true,
+    path: routeLink.Home,
+  },
+];
+
+const routes: IRouteConfig[] = [
+  {
+    childrens: NonAuthRouteArray,
+    componentParent: ComponentParent.common,
+    componentPath: "Layout/Public/PublicLayout",
+    isAuthenticated: true,
+    path: "",
+    type: componentType.LAYOUT,
+  },
+  {
+    childrens: AuthRouteArray,
+    componentParent: ComponentParent.common,
+    componentPath: "Layout/User/UserLayout",
+    isAuthenticated: false,
+    path: "",
+    type: componentType.LAYOUT,
+  },
+];
+
+const componentCache: { [key: string]: React.ComponentType<any> } = {};
+
+const generateLazyComponent = (r: IRouteConfig) => {
+  const { componentParent, componentPath } = r;
+  const cacheKey = `${componentParent}/${componentPath || ""}`;
+
+  if (componentCache[cacheKey]) {
+    return componentCache[cacheKey];
+  }
+
+  const LazyComponent = lazy(() => {
+    return Promise.resolve(
+      import(`../components/${componentParent}/${componentPath}.tsx`)
+    ).catch((error) => console.log(error.message));
+  });
+
+  const MemoizedComponent = memo(LazyComponent);
+
+  componentCache[cacheKey] = MemoizedComponent;
+  return MemoizedComponent;
+};
+
+export { routes, generateLazyComponent, routeLink as roueLink };

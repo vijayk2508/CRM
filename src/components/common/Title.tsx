@@ -1,14 +1,13 @@
-import * as React from 'react';
-import Typography from '@mui/material/Typography';
+import * as React from "react";
+import Typography from "@mui/material/Typography";
+import { IReactChildren } from "../../interfaces/IGeneral";
 
-interface TitleProps {
-  children?: React.ReactNode;
-}
-
-export default function Title(props: TitleProps) {
+const Title: React.FC<IReactChildren> = (props) => {
   return (
     <Typography component="h2" variant="h6" color="primary" gutterBottom>
       {props.children}
     </Typography>
   );
-}
+};
+
+export default Title;
