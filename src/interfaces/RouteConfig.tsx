@@ -1,7 +1,12 @@
-export default interface RouteConfig {
+ interface iRouteConfig {
   path: string;
   componentPath: string;
   exact?: boolean;
 }
 
-export {};
+interface iRoueLink {
+  [key: string]: string;
+}
+
+
+export type { iRoueLink, iRouteConfig } 
