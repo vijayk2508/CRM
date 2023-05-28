@@ -54,7 +54,7 @@ const NonAuthRouteArray: IRouteConfig[] = [
 const AuthRouteArray: IRouteConfig[] = [
   {
     componentParent: "pages",
-    componentPath: "Customer/Customer",
+    componentPath: "Feeds/Feeds",
     exact: true,
     isAuthenticated: true,
     path: routeLink.Home,

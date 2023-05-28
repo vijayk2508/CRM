@@ -1,107 +1,195 @@
-import * as React from "react";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React from "react";
+import { makeStyles } from "@material-ui/core";
 
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
-
+import Container from "@mui/material/Container";
+import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
-import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import HomeIcon from "@mui/icons-material/Home";
+import SearchIcon from "@mui/icons-material/Search";
+import AddIcon from "@mui/icons-material/Add";
+import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import { AppBar } from "../../AppBar";
-import Drawer from "../../Drawer";
-import Sidebar from "../../Sidebar";
-import Copyright from "../../Copyright";
-import { IReactChildren } from "../../../../interfaces/IGeneral";
+const useStyles = makeStyles((theme) => ({
+  root: {
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between", // Adjust vertical alignment
+  },
+  appBar: {
+    marginBottom: theme.spacing(2),
+  },
+  logo: {
+    flexGrow: 1, // Grow to occupy remaining space
+  },
 
-const UserLayout: React.FC<IReactChildren> = (props) => {
-  console.log(props);
+  userIcon: {
+    marginLeft: "auto",
+  },
 
-  const [open, setOpen] = React.useState(true);
-  const toggleDrawer = () => {
-    setOpen(!open);
-  };
+  content: {
+    flexGrow: 1,
+    overflow: "auto",
+  },
+
+  footer: {
+    display: "flex",
+    justifyContent: "space-around !important",
+    alignItems: "center",
+    backgroundColor: "#f0f0f0",
+    padding: 10,
+    position: "fixed",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    borderTop: `1px solid ${theme.palette.divider}`,
+    [theme.breakpoints.down("sm")]: {
+      padding: 5,
+    },
+  },
+  footerLink: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    textDecoration: "none",
+    color: "#666",
+    "& i": {
+      marginBottom: 5,
+    },
+    [theme.breakpoints.down("sm")]: {
+      flex: 1,
+      textAlign: "center",
+    },
+  },
+
+  centerFooterButtons: {
+    flex: 1,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: theme.spacing(1),
+    position: "relative",
+    [theme.breakpoints.down("xs")]: {
+      flexBasis: "100%",
+      position: "relative",
+    },
+  },
+
+  centerButton: {
+    top: "-55%",
+    position: "absolute",
+
+    [theme.breakpoints.down("xs")]: {
+      top: "-55%",
+      position: "absolute",
+    },
+  },
+}));
+
+const UserLayout: React.FC<any> = ({ children }) => {
+  const classes = useStyles();
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <AppBar position="absolute" open={open}>
-        <Toolbar
-          sx={{
-            pr: "24px", // keep right padding when drawer closed
-          }}
-        >
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={toggleDrawer}
-            sx={{
-              marginRight: "36px",
-              ...(open && { display: "none" }),
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            sx={{ flexGrow: 1 }}
-          >
-            Dashboard
+    <div className={classes.root}>
+      <AppBar position="static" className={classes.appBar}>
+        <Toolbar>
+          <Typography variant="h6" className={classes.logo}>
+            Logo
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
+          <IconButton className={classes.userIcon}>
+            <AccountCircleIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
-        <Toolbar
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-end",
-            px: [1],
-          }}
-        >
-          <IconButton onClick={toggleDrawer}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </Toolbar>
-        <Divider />
-        <Sidebar />
-      </Drawer>
-      <Box
-        component="main"
-        sx={{
-          backgroundColor: (theme) =>
-            theme.palette.mode === "light"
-              ? theme.palette.grey[100]
-              : theme.palette.grey[900],
-          flexGrow: 1,
-          height: "100vh",
-          overflow: "auto",
-        }}
-      >
-        <Toolbar />
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Grid container spacing={3}>
-            {props.children}
+      <Container component="main" maxWidth="lg" className={classes.content}>
+        {children}
+      </Container>
+
+      <BottomNavigation className={classes.footer}>
+        <BottomNavigationAction
+          className={classes.footerLink}
+          icon={<HomeIcon />}
+        />
+        <BottomNavigationAction
+          className={classes.footerLink}
+          icon={<SearchIcon />}
+        />
+
+        <a href="#" className={classes.footerLink}>
+          <Box
+            sx={{
+              width: 48,
+              height: 48,
+              bgcolor: "primary.main",
+              borderRadius: "50%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              position: "relative",
+            }}
+            className={classes.centerButton}
+          >
+            <IconButton>
+              <AddIcon sx={{ color: "common.white" }} />
+            </IconButton>
+          </Box>
+        </a>
+
+        <BottomNavigationAction
+          className={classes.footerLink}
+          icon={<VideoLibraryIcon />}
+        />
+        <BottomNavigationAction
+          className={classes.footerLink}
+          icon={<AccountCircleIcon />}
+        />
+      </BottomNavigation>
+
+      {/* <BottomNavigation className={classes.footer}>
+        <Grid container justifyContent="space-around">
+          <Grid item className={classes.footerButtons}>
+            <BottomNavigationAction icon={<HomeIcon />} />
           </Grid>
-          <Copyright sx={{ pt: 4 }} />
-        </Container>
-      </Box>
-    </Box>
+          <Grid item className={classes.footerButtons}>
+            <BottomNavigationAction icon={<SearchIcon />} />
+          </Grid>
+          <Grid item className={classes.centerFooterButtons}>
+            <Box
+              sx={{
+                width: 48,
+                height: 48,
+                bgcolor: "primary.main",
+                borderRadius: "50%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                position: "relative",
+              }}
+              className={classes.centerButton}
+            >
+              <IconButton>
+                <AddIcon sx={{ color: "common.white" }} />
+              </IconButton>
+            </Box>
+          </Grid>
+
+          <Grid item className={classes.footerButtons}>
+            <BottomNavigationAction icon={<VideoLibraryIcon />} />
+          </Grid>
+          <Grid item className={classes.footerButtons}>
+            <BottomNavigationAction icon={<AccountCircleIcon />} />
+          </Grid>
+        </Grid>
+      </BottomNavigation> */}
+    </div>
   );
 };
 

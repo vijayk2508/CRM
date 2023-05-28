@@ -10,7 +10,18 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { generateLazyComponent, routes } from "./routeConstant";
 import { IRouteConfig } from "../interfaces/IRouteConfig";
 
-const defaultTheme = createTheme();
+const defaultTheme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 960,
+      lg: 1280,
+      xl: 1920,
+    },
+  },
+  spacing: (factor: any) => `${0.5 * factor}rem`, // Customize spacing value as needed
+});
 
 const AppRoutes: React.FC = () => {
   useEffect(() => {
@@ -38,8 +49,6 @@ const AppRoutes: React.FC = () => {
     () => routes[localStorage.getItem("userId") ? 1 : 0],
     []
   );
-
-  console.log(curRoute);
 
   const LayoutComponent = generateLazyComponent(curRoute);
 
