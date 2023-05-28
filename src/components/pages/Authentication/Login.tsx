@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
 import { useNavigate } from "react-router-dom";
-import { roueLink } from "../../../AppRoutes/routeConstant";
+import { routeLink } from "../../../AppRoutes/routeConstant";
 import Copyright from "../../common/Copyright";
 
 const Login: React.FC = () => {
@@ -28,7 +28,7 @@ const Login: React.FC = () => {
   };
 
   const handleResetPassword = useCallback(() => {
-    navigate(roueLink.ForgetPassword);
+    navigate(routeLink.ForgetPassword);
   }, [navigate]);
 
   return (
@@ -73,12 +73,7 @@ const Login: React.FC = () => {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
+          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
             Sign In
           </Button>
           <Grid container>
@@ -99,3 +94,4 @@ const Login: React.FC = () => {
 };
 
 export default Login;
+

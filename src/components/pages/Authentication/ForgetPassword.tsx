@@ -10,7 +10,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
-import { roueLink } from "../../../AppRoutes/routeConstant";
+import { routeLink } from "../../../AppRoutes/routeConstant";
 import Copyright from "../../common/Copyright";
 
 const ForgotPassword: React.FC = () => {
@@ -25,7 +25,7 @@ const ForgotPassword: React.FC = () => {
   };
 
   const handleResetPassword = useCallback(() => {
-    navigate(roueLink.ForgetPassword);
+    navigate(routeLink.ForgetPassword);
   }, [navigate]);
 
   return (
@@ -56,12 +56,7 @@ const ForgotPassword: React.FC = () => {
             autoComplete="email"
             autoFocus
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
+          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
             Submit
           </Button>
           <Grid container>
@@ -84,3 +79,4 @@ const ForgotPassword: React.FC = () => {
 };
 
 export default ForgotPassword;
+

@@ -7,7 +7,7 @@ const routeLink: IKeyValue = {
   SignUp: "/SignUp",
   ForgetPassword: "/ForgetPassword",
   ResetPassword: "/ResetPassword",
-  Customer: "/Customer",
+  MyProfile: "/MyProfile",
 };
 
 const componentType: IKeyValue = {
@@ -59,6 +59,14 @@ const AuthRouteArray: IRouteConfig[] = [
     isAuthenticated: true,
     path: routeLink.Home,
   },
+
+  {
+    componentParent: "pages",
+    componentPath: "MyProfile/MyProfile",
+    exact: true,
+    isAuthenticated: true,
+    path: routeLink.Home,
+  },
 ];
 
 const routes: IRouteConfig[] = [
@@ -91,9 +99,9 @@ const generateLazyComponent = (r: IRouteConfig) => {
   }
 
   const LazyComponent = lazy(() => {
-    return Promise.resolve(
-      import(`../components/${componentParent}/${componentPath}.tsx`)
-    ).catch((error) => console.log(error.message));
+    return Promise.resolve(import(`../components/${componentParent}/${componentPath}.tsx`)).catch(
+      (error) => console.log(error.message)
+    );
   });
 
   const MemoizedComponent = memo(LazyComponent);
@@ -102,4 +110,5 @@ const generateLazyComponent = (r: IRouteConfig) => {
   return MemoizedComponent;
 };
 
-export { routes, generateLazyComponent, routeLink as roueLink };
+export { routes, generateLazyComponent, routeLink };
+

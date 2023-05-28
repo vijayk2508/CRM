@@ -16,6 +16,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useNavigate } from "react-router-dom";
+import { routeLink } from "../../../../AppRoutes/routeConstant";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -96,7 +98,7 @@ const useStyles = makeStyles((theme) => ({
 
 const UserLayout: React.FC<any> = ({ children }) => {
   const classes = useStyles();
-
+  const navigate = useNavigate();
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.appBar}>
@@ -114,14 +116,8 @@ const UserLayout: React.FC<any> = ({ children }) => {
       </Container>
 
       <BottomNavigation className={classes.footer}>
-        <BottomNavigationAction
-          className={classes.footerLink}
-          icon={<HomeIcon />}
-        />
-        <BottomNavigationAction
-          className={classes.footerLink}
-          icon={<SearchIcon />}
-        />
+        <BottomNavigationAction className={classes.footerLink} icon={<HomeIcon />} />
+        <BottomNavigationAction className={classes.footerLink} icon={<SearchIcon />} />
 
         <a href="#" className={classes.footerLink}>
           <Box
@@ -143,54 +139,16 @@ const UserLayout: React.FC<any> = ({ children }) => {
           </Box>
         </a>
 
-        <BottomNavigationAction
-          className={classes.footerLink}
-          icon={<VideoLibraryIcon />}
-        />
+        <BottomNavigationAction className={classes.footerLink} icon={<VideoLibraryIcon />} />
         <BottomNavigationAction
           className={classes.footerLink}
           icon={<AccountCircleIcon />}
+          onClick={() => navigate(routeLink.MyProfile)}
         />
       </BottomNavigation>
-
-      {/* <BottomNavigation className={classes.footer}>
-        <Grid container justifyContent="space-around">
-          <Grid item className={classes.footerButtons}>
-            <BottomNavigationAction icon={<HomeIcon />} />
-          </Grid>
-          <Grid item className={classes.footerButtons}>
-            <BottomNavigationAction icon={<SearchIcon />} />
-          </Grid>
-          <Grid item className={classes.centerFooterButtons}>
-            <Box
-              sx={{
-                width: 48,
-                height: 48,
-                bgcolor: "primary.main",
-                borderRadius: "50%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                position: "relative",
-              }}
-              className={classes.centerButton}
-            >
-              <IconButton>
-                <AddIcon sx={{ color: "common.white" }} />
-              </IconButton>
-            </Box>
-          </Grid>
-
-          <Grid item className={classes.footerButtons}>
-            <BottomNavigationAction icon={<VideoLibraryIcon />} />
-          </Grid>
-          <Grid item className={classes.footerButtons}>
-            <BottomNavigationAction icon={<AccountCircleIcon />} />
-          </Grid>
-        </Grid>
-      </BottomNavigation> */}
     </div>
   );
 };
 
 export default UserLayout;
+
