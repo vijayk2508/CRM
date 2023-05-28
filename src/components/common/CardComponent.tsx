@@ -15,7 +15,7 @@ import ImageSwapper from "./ImageSwapper";
 
 const CardComponent: React.FC<any> = (props) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
+  console.log(">>>>>>>>props", props);
   const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -28,16 +28,12 @@ const CardComponent: React.FC<any> = (props) => {
     <Card className="flex-item">
       <CardHeader
         title={
-          <div style={{ display: "flex", alignItems: "center", justifyContent: 'space-between' }}>
-            <span style={{ marginRight: "8px" }}>{props.username || "Admin"}</span>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <span style={{ marginRight: "8px" }}>{props.card.title || "Admin"}</span>
             <IconButton onClick={handleMenuClick}>
               <MoreVertIcon />
             </IconButton>
-            <Menu
-              anchorEl={anchorEl}
-              open={Boolean(anchorEl)}
-              onClose={handleMenuClose}
-            >
+            <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
               <MenuItem onClick={handleMenuClose}>Download</MenuItem>
             </Menu>
           </div>
@@ -45,7 +41,7 @@ const CardComponent: React.FC<any> = (props) => {
       />
       <CardContent style={{ position: "relative" }}>
         <ImageSwapper />
-        {props.title}
+        {props.card.content}
       </CardContent>
       <CardActions disableSpacing>
         <IconButton>
@@ -68,3 +64,4 @@ const CardComponent: React.FC<any> = (props) => {
 };
 
 export default CardComponent;
+

@@ -65,7 +65,7 @@ const AuthRouteArray: IRouteConfig[] = [
     componentPath: "MyProfile/MyProfile",
     exact: true,
     isAuthenticated: true,
-    path: routeLink.Home,
+    path: routeLink.MyProfile,
   },
 ];
 
