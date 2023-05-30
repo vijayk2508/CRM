@@ -53,7 +53,7 @@ const CardComponent: React.FC<any> = (props) => {
       />
       <CardContent style={{ position: "relative" }}>
         <ImageSwapper images={props.card.images} />
-        {props.card.content}
+        {props.card.contents}
       </CardContent>
       <CardActions disableSpacing>
         <IconButton>

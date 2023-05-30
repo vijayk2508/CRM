@@ -6,6 +6,7 @@ import TextField from "@mui/material/TextField";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { createPost } from "../../../services/post";
+import ImageSwapper from "../../common/ImageSwapper";
 
 const style = {
   position: "absolute",
@@ -157,34 +158,35 @@ const CreateEditPost: React.FC<any> = ({
           <AddIcon />
         </div>
 
-        <Grid container spacing={2}>
-          {formData.images?.map((image: any, index: number) => (
-            <Grid item key={index}>
-              <div style={{ position: "relative" }}>
-                <IconButton
-                  style={{
-                    position: "absolute",
-                    top: -10,
-                    right: -10,
-                    color: "black",
-                    background: "white",
-                    contain: "style",
-                  }}
-                  onClick={() => handleRemoveImage(index)}
-                >
-                  <DeleteIcon />
-                </IconButton>
-                <img
-                  src={image}
-                  alt={`Preview ${index}`}
-                  height="100"
-                  style={{ display: "block" }}
-                />
-              </div>
-            </Grid>
-          ))}
-        </Grid>
-
+        {formData.images.length && (<Grid container spacing={0}>
+          <ImageSwapper images={formData.images} onlyImage={true} />
+          {/*formData.images?.map((image: any, index: number) => (
+            // <Grid item key={index}>
+            //   <div style={{ position: "relative" }}>
+            //     <IconButton
+            //       style={{
+            //         position: "absolute",
+            //         top: -10,
+            //         right: -10,
+            //         color: "black",
+            //         background: "white",
+            //         contain: "style",
+            //       }}
+            //       onClick={() => handleRemoveImage(index)}
+            //     >
+            //       <DeleteIcon />
+            //     </IconButton>
+            //     <img
+            //       src={image}
+            //       alt={`Preview ${index}`}
+            //       height="100"
+            //       style={{ display: "block" }}
+            //     />
+            //   </div>
+            // </Grid>
+          ))*/}
+        </Grid>)
+        }
         <div
           style={{
             display: "flex",
