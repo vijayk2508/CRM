@@ -15,17 +15,32 @@ import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
 import { routeLink } from "../../../AppRoutes/routeConstant";
 import Copyright from "../../common/Copyright";
+import { login } from "../../../services/user";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+
+  const handleSubmit = useCallback(
+    async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+
+      try {
+        await login({
+          email: data.get("email") as string,
+          password: data.get("password") as string,
+        });
+
+        // Login successful, navigate to the desired page
+        navigate(routeLink.Home);
+        window.location.reload();
+      } catch (error) {
+        // Handle login error
+        console.error("Login failed:", error);
+      }
+    },
+    [navigate]
+  );
 
   const handleResetPassword = useCallback(() => {
     navigate(routeLink.ForgetPassword);
@@ -73,7 +88,12 @@ const Login: React.FC = () => {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
             Sign In
           </Button>
           <Grid container>
@@ -94,4 +114,3 @@ const Login: React.FC = () => {
 };
 
 export default Login;
-

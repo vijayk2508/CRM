@@ -1,8 +1,15 @@
 import React, { Suspense, useEffect, useMemo, useCallback } from "react";
-import { BrowserRouter, Route, Routes, Navigate, Outlet } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { generateLazyComponent, routes } from "./routeConstant";
 import { IRouteConfig } from "../interfaces/IRouteConfig";
+import { getCookie } from "../utils/constant";
 
 const defaultTheme = createTheme({
   breakpoints: {
@@ -18,14 +25,15 @@ const defaultTheme = createTheme({
 });
 
 const AppRoutes: React.FC = () => {
+  const authToken = useMemo(() => getCookie("userToken"), []);
+
   useEffect(() => {
-    const userId = localStorage.getItem("userId");
-    const shouldRedirect = !userId && window.location.pathname !== "/";
+    const shouldRedirect = !authToken && window.location.pathname !== "/";
 
     if (shouldRedirect) {
       window.location.href = "/";
     }
-  }, []);
+  }, [authToken]);
 
   const renderRoutes = useCallback((objRoute: IRouteConfig[]) => {
     return objRoute.map((r1) => {
@@ -39,7 +47,7 @@ const AppRoutes: React.FC = () => {
     });
   }, []);
 
-  const curRoute = useMemo(() => routes[localStorage.getItem("userInfo") ? 1 : 0], []);
+  const curRoute = useMemo(() => routes[getCookie("userToken") ? 1 : 0], []);
 
   const LayoutComponent = generateLazyComponent(curRoute);
 
@@ -67,4 +75,3 @@ const AppRoutes: React.FC = () => {
 };
 
 export default AppRoutes;
-
