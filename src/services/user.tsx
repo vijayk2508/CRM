@@ -12,15 +12,14 @@ export async function login({
 }): Promise<any> {
   try {
     const response = await Service.post("/user/login", { email, password });
-    console.log(response.data);
 
-    const { token } = response?.data?.data;
-
-    // Store the token in a cookie
-    setCookie("userToken", token); // Assuming you have a function to set the cookie
-
-    return response.data;
+    if (response?.data?.data) {
+      const { token = "" } = response.data.data;
+      setCookie("userToken", token);
+      setCookie("userInfo", JSON.stringify(response.data.data));
+    }
+    return true;
   } catch (error: any) {
-    throw error.response.data;
+    return false;
   }
 }

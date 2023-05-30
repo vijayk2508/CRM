@@ -1,90 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import CardComponent from "../../common/CardComponent";
-import { Grid } from "@mui/material";
-import { makeStyles } from "@material-ui/core";
+
 import { getPosts } from "../../../services/post";
+import { IPost } from "../../../interfaces/IPost";
 
-const useStyles = makeStyles((theme) => ({
-  hiddenOnXSAndSM: {
-    [theme.breakpoints.down("sm")]: {
-      display: "none",
-    },
-  },
-}));
-
-const data = [
-  {
-    id: 1,
-    title: "Card 1",
-    images: [
-      "https://via.placeholder.com/500",
-      "https://picsum.photos/500/300",
-      "https://source.unsplash.com/random/500x300",
-    ],
-  },
-  {
-    id: 2,
-    title: "Card 2",
-    images: [
-      "https://loremflickr.com/500/300",
-      "https://placeimg.com/500/300/any",
-    ],
-  },
-  {
-    id: 3,
-    title: "Card 3",
-    images: ["https://source.unsplash.com/random/500x300"],
-  },
-  {
-    id: 1,
-    title: "Card 1",
-    images: [
-      "https://via.placeholder.com/500",
-      "https://picsum.photos/500/300",
-      "https://source.unsplash.com/random/500x300",
-    ],
-  },
-  {
-    id: 2,
-    title: "Card 2",
-    images: [
-      "https://loremflickr.com/500/300",
-      "https://placeimg.com/500/300/any",
-    ],
-  },
-  {
-    id: 3,
-    title: "Card 3",
-    images: ["https://source.unsplash.com/random/500x300"],
-  },
-];
+const progressStatus = {
+  toLoad: "toLoad",
+  loading: "loading",
+  loaded: "loaded",
+};
 
 const Feeds: React.FC = () => {
-  const [datas, setData] = useState([]);
-  const classes = useStyles();
+  const [postArray, setPostArray] = useState([]);
+  const [loading, setLoading] = useState(progressStatus.toLoad);
+  const [resStatus, setResStatus] = useState({
+    status: false,
+    message: "",
+  });
 
-  // const getAllPosts = () => {
-  //   getPosts()
-  //     .then((data) => {
-  //       console.log(data);
-  //       setData(data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  const getAllPostFn = useCallback(async () => {
+    setLoading(progressStatus.loading);
 
-  // useEffect(() => {
-  //   getAllPosts();
-  // }, []);
+    const { status, data, message } = await getPosts();
+    setPostArray(data);
+    setLoading(progressStatus.loaded);
+
+    if (!status) {
+      setResStatus({ status, message });
+    }
+  }, []);
+
+  useEffect(() => {
+    getAllPostFn();
+  }, [getAllPostFn]);
+
+  console.log(postArray);
 
   return (
     <>
-      <div className="flex">
-        {data.map((card, i) => (
-          <CardComponent key={i} card={card} />
-        ))}
-      </div>
+      {loading !== progressStatus.loaded ? (
+        "Loading..."
+      ) : (
+        <div className="flex">
+          {postArray.map((post: IPost) => (
+            <CardComponent key={post._id} card={post} />
+          ))}
+        </div>
+      )}
     </>
   );
 };

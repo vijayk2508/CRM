@@ -3,7 +3,6 @@ import { getCookie } from "../utils/constant";
 
 const Service: AxiosInstance = axios.create({
   baseURL: "http://localhost:4000", // Replace with your API base URL
-  timeout: 5000, // Set a timeout value if needed
 });
 
 Service.interceptors.request.use((config) => {
