@@ -94,3 +94,20 @@ export function getCookie(name: string): string | undefined {
   );
   return cookieValue ? cookieValue.pop() : undefined;
 }
+
+export const modalType = {
+  AddEditPost: "AddPost",
+  EditPost: "EditPost",
+};
+
+export const progressStatus = {
+  toLoad: "toLoad",
+  loading: "loading",
+  loaded: "loaded",
+};
+
+export const defaultModalData = {
+  open: false,
+  type: "",
+  data: null,
+}

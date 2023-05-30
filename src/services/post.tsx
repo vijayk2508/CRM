@@ -1,3 +1,4 @@
+import { IPost } from "../interfaces/IPost";
 import Service from "./service";
 
 export async function getPosts(): Promise<any> {
@@ -9,10 +10,10 @@ export async function getPosts(): Promise<any> {
   }
 }
 
-// export const createPost = async (post: any): Promise<any> => {
-//   const response = await axios.post<any>(`${BASE_URL}/posts`, post);
-//   return response.data;
-// };
+export async function createPost(postData: IPost): Promise<any> {
+  const response = await Service.post(`/posts`, postData);
+  return response.data;
+}
 
 // export const updatePost = async (postId: number, post: any): Promise<any> => {
 //   const response = await axios.put<any>(`${BASE_URL}/posts/${postId}`, post);

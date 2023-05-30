@@ -26,14 +26,15 @@ const Login: React.FC = () => {
       const data = new FormData(event.currentTarget);
 
       try {
-        await login({
+        const res = await login({
           email: data.get("email") as string,
           password: data.get("password") as string,
         });
 
-        // Login successful, navigate to the desired page
-        navigate(routeLink.Home);
-        window.location.reload();
+        if (res) {
+          navigate(routeLink.Home);
+          window.location.reload();
+        }
       } catch (error) {
         // Handle login error
         console.error("Login failed:", error);

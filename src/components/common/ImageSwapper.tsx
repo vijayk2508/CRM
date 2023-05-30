@@ -4,10 +4,12 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 const ImageSwapper: React.FC<any> = (props) => {
+  
   const images: string[] = useMemo(
-    () => props.images.map((i: any) => i.file || "").filter((i: string) => i),
-    [props.images]
+    () => props.onlyImage ? props.images : props.images.map((i: any) => i.file || "").filter((i: string) => i),
+    [props.images, props.onlyImage]
   );
+  
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [transition, setTransition] = useState(false);

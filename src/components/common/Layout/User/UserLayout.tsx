@@ -3,8 +3,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/core";
 
 import Container from "@mui/material/Container";
-
-import Footer from "./Footer";
 import Header from "./Header";
 
 const useStyles: any = makeStyles((theme) => ({
@@ -33,7 +31,7 @@ const UserLayout: React.FC<any> = ({ children }) => {
       <Container component="main" maxWidth="lg" className={classes.content}>
         {children}
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
